@@ -1,0 +1,11 @@
+.users-button{
+    margin-left: 15px;
+}
+.logout-button{
+    margin-right:15px;
+}
+.mat-toolbar span{
+    text-align: center;
+    height: 100%;
+    line-height: 30px;
+}

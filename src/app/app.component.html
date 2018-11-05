@@ -1,0 +1,13 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar>
+  <button mat-button routerLink='/'>
+    Book Club App
+  </button>
+  <button class='users-button' routerLink='/users' mat-raised-button>Users</button>
+  <span style='flex: 1 1 auto;'>  <span *ngIf='authService.userName'>Welcome</span>  {{authService.userName}}</span>
+  <button class='logout-button' *ngIf="!authService.isAuthenticated" routerLink='/login' mat-raised-button>Login</button>
+  <button routerLink='/register' *ngIf="!authService.isAuthenticated" mat-raised-button>Register</button>
+  <button  *ngIf="authService.isAuthenticated" (click)='authService.logout()' mat-raised-button>Logout</button>
+</mat-toolbar>
+<router-outlet></router-outlet>
+

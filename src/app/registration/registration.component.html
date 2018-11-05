@@ -1,0 +1,29 @@
+<!-- Register -->
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Register New User
+      <span *ngIf='authService.userRejected' style='color:red; margin-left: 10px;'>There's already an account with this email address</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form action="">
+      <mat-form-field>
+        <input [(ngModel)]='registrationData.email' name='email' matInput type='email' placeholder='email'>
+      </mat-form-field>
+      <mat-form-field>
+        <input [(ngModel)]='registrationData.pwd' name='password' matInput type='password'  placeholder="password">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input [(ngModel)]='registrationData.name' name='name' matInput  placeholder="name">
+      </mat-form-field>
+      <br>
+      <mat-form-field class='profile-description'>
+        <textarea [(ngModel)]='registrationData.description' name='description' matInput placeholder="description"></textarea>
+      </mat-form-field>
+      <br>
+      <button (click)='post()' mat-raised-button color='primary'>Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>
