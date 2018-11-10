@@ -8,7 +8,10 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginData = {};
+  loginData = {
+    email: '',
+    pwd: ''
+  };
   constructor(private authService: AuthService) { }
   login() {
     this.authService.loginUser(this.loginData)

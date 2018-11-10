@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class MessagesComponent implements OnInit {
   messages = [];
-  constructor(private apiService : ApiService, private route:ActivatedRoute) { }
+  constructor(public apiService : ApiService, private route:ActivatedRoute) { }
 
   ngOnInit() {
     // var id = this.route.snapshot.params.id

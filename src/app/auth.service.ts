@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
+import {environment } from  '../environments/environment'
 import { RouterModule, Router } from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 // import { RegistrationComponent } from  './registration/registration.component'
@@ -9,7 +10,7 @@ export class AuthService {
     private subject = new Subject<any>();
     
     userRejected = false;
-    path = 'http://localhost:3000/auth'
+    path = environment.path +'/auth'
     TOKEN_KEY = 'token'
     shitIsBunk = false;
 
@@ -19,7 +20,7 @@ export class AuthService {
         return localStorage.getItem(this.TOKEN_KEY)
     }
     get userName(){
-            return localStorage.getItem('name')
+        return localStorage.getItem('name')
     }
     get isAuthenticated(){
         return !!localStorage.getItem(this.TOKEN_KEY)

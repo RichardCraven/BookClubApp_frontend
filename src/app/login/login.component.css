@@ -1,0 +1,15 @@
+.mat-card{
+    height: 40vh;
+}
+.mat-card-content{
+    margin: 0 16px;
+}
+div.mat-card-header{
+    margin: 0px;
+}
+.mat-form-field{
+    width: 60%;
+}
+.button-container{
+    width: 100%;
+}
