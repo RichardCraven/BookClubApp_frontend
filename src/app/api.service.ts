@@ -22,9 +22,29 @@ export class ApiService {
         this.http.post(this.path + '/post', message).subscribe(res => {
         })
     }
+    
     getUsers() {
         this.http.get<any>(this.path + '/users').subscribe(res => {
             this.users = res;
+        })
+    }
+    addFriend(userData){
+        console.log('in auth service, adding friend, userData is ', userData);
+        
+        this.http.post<any>(this.path + '/addfriend', userData)
+        .subscribe(res => {
+            console.log('in addfriend res, res is', res);
+        },
+        err => {
+            if(err.status == 418){
+                // this.userRejected = true;
+                // var that = this;
+                // setTimeout(function(){
+                //     that.userRejected = false;
+                //     that.sendMessage('clear-fields')
+                // }, 3500);
+                
+            }
         })
     }
     getProfile(id) {

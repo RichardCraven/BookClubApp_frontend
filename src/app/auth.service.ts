@@ -12,7 +12,6 @@ export class AuthService {
     userRejected = false;
     path = environment.path +'/auth'
     TOKEN_KEY = 'token'
-    shitIsBunk = false;
 
     constructor(private http: HttpClient, private router: Router) { }
 
@@ -28,7 +27,6 @@ export class AuthService {
         //!! returns true if it does exist
         //converts to boolean
     }
-
     registerUser(registrationData){
         this.http.post<any>(this.path + '/register', registrationData)
         .subscribe(res => {
@@ -48,8 +46,20 @@ export class AuthService {
     }
     loginUser(loginData) {
         this.http.post<any>(this.path + '/login', loginData).subscribe(res => {
+            console.log('wtf, res is!! ', res)
+            if(res.admin){
+                this.sendMessage('isAdmin')
+            } else {
+                this.sendMessage('isNotAdmin')
+            }
+            console.log('response is ', res);
+            
             this.login(res.token, res.name)
-        })
+        },
+        err => {
+            console.log('error! is ', err)
+        }
+        )
     }
     login(token, name){
         localStorage.setItem(this.TOKEN_KEY, token)
@@ -59,6 +69,13 @@ export class AuthService {
     logout(){
         localStorage.clear()
         this.router.navigate(['/login']);
+    }
+    checkAdminPrivileges(){
+        this.http.post<any>(this.path + '/checkAdmin', {dummyData : 'data'}).subscribe(res => {
+            if(res.admin){
+                this.sendMessage('isAdmin')
+            };
+        })
     }
     //observable practice
     sendMessage(message: string) {

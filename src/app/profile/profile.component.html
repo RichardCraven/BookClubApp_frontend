@@ -2,6 +2,7 @@
   <mat-card-header>
     <mat-card-title>
       Profile
+      <button style='cursor:pointer;' (click)='addFriend()'>Add Friend</button>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -9,6 +10,16 @@
       <mat-list-item>Name: {{profile?.name}}</mat-list-item>
       <mat-list-item>Email: {{profile?.email}}</mat-list-item>
       <mat-list-item>Bio: {{profile?.description}}</mat-list-item>
+      <mat-list-item class='friends-list' id='cmon'  style='height: 300px; align-items: start;'>
+        Friends:
+        <mat-list   style='align-items: start;'>
+          <mat-list-item *ngFor='let friend of profile?.friends'>
+            {{friend.name}}
+          </mat-list-item>
+        </mat-list>
+        
+        <!-- Friends: {{profile?.friendList}} -->
+      </mat-list-item>
     </mat-list>
   </mat-card-content>
   <app-messages></app-messages>  

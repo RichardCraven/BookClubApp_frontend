@@ -1,8 +1,83 @@
 .mat-card{
-    height: 40vh;
+    /* height: 40vh; */
     text-align: center;
+    overflow: hidden;
 }
-img{
+/* img{
     height: 600px;
     width:   800px;
+} */
+.main-card{
+    height: 100%;
+}
+#left1, #left2, #left3{
+    height: 60vh;
+    width: 50%;
+    display: inline-block;
+    overflow: scroll;
+}
+
+#right1, #right2, #right3{
+    height: 60vh;
+    width: 50%;
+    overflow: scroll;
+    display: inline-block;
+    /* border-left: 1px solid black; */
+}
+#left1{
+    background-color: azure;
+}
+#left2{
+    background-color: azure;
+}
+#left3{
+    background-color: blanchedalmond
+}
+#right1{
+    background-color: aliceblue;
+}
+#right2{
+    background-color: aliceblue;
+}
+#right3{
+    background-color: beige;
+}
+.main-card h5, .main-card h6{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+mat-tab-body-content{
+    /* overflow:hidden !important; */
+}
+mat-grid-list{
+    /* margin-top: 10px; */
+    overflow: scroll;
+    height: 100% !important
+    ;
+}
+mat-grid-tile {
+    background: white !important;
+    border: 1px solid black;
+    font-size: 0.6em;
+}
+#left1 mat-grid-tile{
+    width: calc(((50% - 6px) * 1) + 0px) !important;
+}
+#right1 mat-grid-tile{
+    width: calc(((100% - 6px) * 1) + 3px) !important;
+    /* height: 10px !important; */
+}
+
+mat-grid-tile-header{
+    background-color: white !important;
+    color: black !important;
+    /* opacity: 0.7 */
+}
+mat-grid-tile-footer{
+    background-color: white !important;
+    color: black !important;
+}
+mat-grid-tile:hover, mat-grid-tile-header:hover, mat-grid-tile-footer:hover{
+    background-color: violet !important;
+    cursor: pointer;
 }

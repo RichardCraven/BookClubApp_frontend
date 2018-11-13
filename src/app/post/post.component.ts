@@ -11,7 +11,7 @@ export class PostComponent {
   constructor(private apiService: ApiService) { }
 
   post(){
-    console.log(localStorage);
+    // console.log(localStorage);
     
     // localStorage
     this.apiService.postMessages({msg: this.postMsg})

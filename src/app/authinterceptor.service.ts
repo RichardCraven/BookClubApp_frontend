@@ -9,14 +9,16 @@ export class AuthInterceptorService implements HttpInterceptor{
         
         var authService = this.injector.get(AuthService)
         var authRequest = req.clone()
-        if(req.method !== 'GET'){
+        // console.log('in auth interceptor req is ', req);
+        
+        // if(req.method !== 'GET'){
             console.log('authorizing injector');
             var authRequest = req.clone({
                 // if(req.method !== 'POST'){
                     headers: req.headers.set('Authorization', 'token ' + authService.token)
                 // }
             })
-        }
+        // }
         
         
         return next.handle(authRequest) 

@@ -1,13 +1,60 @@
 <mat-card>
   
   <mat-card-title>
-    WELCOME TO MY BOOKCLUB APP
+    Welcome to the Bay Area Book Club
   </mat-card-title>
   <mat-card-content>
-    <h1>THIS IS A TEST</h1>
-    <img mat-card-image src='https://picsum.photos/600/800'>
+    <!-- <h1>THIS IS A TEST</h1> -->
+    <!-- <img mat-card-image src='../../assets/bayArea.jpg'> -->
   </mat-card-content>
 </mat-card>
-<mat-card>
-  TESTING
+<mat-card *ngIf='!isLoggedIn' class='main-card'>
+  <mat-card-content>
+    This is an app for people who like to read and discuss with people who are reading the same book.
+    <br>
+    Share your theories and predictions as you journey through a world of fiction.
+  </mat-card-content>
+</mat-card>
+<mat-card *ngIf='isLoggedIn' class='main-card'>
+    <mat-tab-group>
+        <mat-tab label="Books">
+            <div id='left1'>
+                <h6>What people are reading</h6>
+                <mat-grid-list cols="2" rowHeight="2:1" gutterSize='8px'>
+                    <mat-grid-tile *ngFor='let book of books; let i = index'  (click)='whodis(i)'>
+                          {{book.title}}
+                        <br> 
+                        <br>
+                          {{book.author}}
+                          <br>
+                           {{book.published}}
+                    </mat-grid-tile>
+                  </mat-grid-list>
+            </div>
+            <div id='right1'>
+                <h6>Recent reviews</h6>
+                <mat-grid-list  cols='1' rowHeight='110px' gutterSize='8px'>
+                  <mat-grid-tile *ngFor='let review of reviews; let i = index'>
+                    {{review.book}}
+                    <br>
+                    {{review.reviewer}}
+                    <br>
+                    {{review.content}}
+                  </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </mat-tab>
+        <mat-tab label="Users"> 
+            <div id='left2'>
+              <!-- <users></users> -->
+              <adminUsersList></adminUsersList>  
+            </div>
+            <div id='right2'></div>
+        </mat-tab>
+        <mat-tab label="Misc">
+            <div id='left3'></div>
+            <div id='right3'></div>
+        </mat-tab>
+    </mat-tab-group>
+  
 </mat-card>

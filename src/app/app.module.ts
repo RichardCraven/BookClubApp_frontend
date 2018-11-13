@@ -18,10 +18,13 @@ import {
   MatInputModule, 
   MatListModule 
 } from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import { RegistrationComponent } from './registration/registration.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { UsersComponent } from './users/users.component';
+import { AdminUsersListComponent } from './users/adminUsersList.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PostComponent } from './post/post.component';
 import { HomeComponent } from './home/home.component'
@@ -33,8 +36,9 @@ var routes = [
   { path: '', component: HomeComponent },
   { path: 'register', component: RegistrationComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'users', component: UsersComponent },
+  { path: 'adminUsersList', component: AdminUsersListComponent },
   { path: 'profile/:id', component: ProfileComponent },
+  { path: 'post', component: PostComponent },  
   { path: '**', component: PostComponent },  
 ]
 
@@ -45,7 +49,7 @@ var routes = [
     RegisterComponent,
     RegistrationComponent,
     LoginComponent,
-    UsersComponent,
+    AdminUsersListComponent,
     ProfileComponent,
     PostComponent,
     HomeComponent
@@ -62,6 +66,8 @@ var routes = [
     MatToolbarModule,
     MatInputModule,
     MatListModule,
+    MatGridListModule,
+    MatTabsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [ApiService, AuthService, {

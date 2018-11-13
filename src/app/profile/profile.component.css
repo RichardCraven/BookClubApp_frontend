@@ -1,0 +1,13 @@
+.friends-list div.mat-list-item-content{
+    align-items: start !important;
+}
+.mat-list .mat-list-item.friends-list .mat-list-item-content{
+    align-items: start !important;
+}
+#cmon{
+    align-items: start !important;
+}
+
+/* none of this shit was working to select the friends list, and it was because the  */
+/* mat-list-content was a injected elsewhere in the DOM so I had to go to the main 
+styles.css to override it */

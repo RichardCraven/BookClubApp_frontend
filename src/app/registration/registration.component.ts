@@ -31,8 +31,8 @@ export class RegistrationComponent implements OnInit {
   }
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this.subscription.unsubscribe();
-}
+    this.subscription.unsubscribe();  
+  }
 
   ngOnInit() {
   }

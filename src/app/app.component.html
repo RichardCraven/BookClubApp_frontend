@@ -1,10 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar>
+<mat-toolbar style='background-size: 100% 100%; background-repeat: no-repeat; background-image: url("../../assets/bayArea.jpg")'>
   <button mat-button routerLink='/'>
-    Book Club App
+    Home
   </button>
-  <button class='users-button' routerLink='/users' mat-raised-button>Users</button>
-  <span style='flex: 1 1 auto;'>  <span *ngIf='authService.userName'>Welcome</span>  {{authService.userName}}</span>
+  <button *ngIf='isAdmin' class='users-button' routerLink='/adminUsersList' mat-raised-button>Users</button>
+  <span style='flex: 1 1 auto;' class='user-name'>  <span *ngIf='authService.userName'>Logged in as</span>  {{authService.userName}}</span>
   <button class='logout-button' *ngIf="!authService.isAuthenticated" routerLink='/login' mat-raised-button>Login</button>
   <button routerLink='/register' *ngIf="!authService.isAuthenticated" mat-raised-button>Register</button>
   <button  *ngIf="authService.isAuthenticated" (click)='authService.logout()' mat-raised-button>Logout</button>
