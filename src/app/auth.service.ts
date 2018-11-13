@@ -10,6 +10,7 @@ export class AuthService {
     private subject = new Subject<any>();
     
     userRejected = false;
+    loginRejected = false;
     path = environment.path +'/auth'
     TOKEN_KEY = 'token'
 
@@ -35,29 +36,32 @@ export class AuthService {
         err => {
             if(err.status == 418){
                 this.userRejected = true;
+                this.sendMessage('clear-fields')
                 var that = this;
                 setTimeout(function(){
                     that.userRejected = false;
-                    that.sendMessage('clear-fields')
-                }, 3500);
+                }, 2500);
                 
             }
         })
     }
     loginUser(loginData) {
         this.http.post<any>(this.path + '/login', loginData).subscribe(res => {
-            console.log('wtf, res is!! ', res)
             if(res.admin){
                 this.sendMessage('isAdmin')
             } else {
                 this.sendMessage('isNotAdmin')
             }
-            console.log('response is ', res);
-            
             this.login(res.token, res.name)
         },
         err => {
             console.log('error! is ', err)
+            this.loginRejected = true;
+            this.sendMessage('clear-fields')
+            var that = this;
+            setTimeout(function(){
+                that.loginRejected = false;
+            }, 2500);
         }
         )
     }

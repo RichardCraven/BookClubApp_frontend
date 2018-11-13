@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
     <mat-card [routerLink]="['/profile', user._id ]" style='cursor: pointer;' >{{user.name}}</mat-card>
   </div>
   `,
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./adminUsersList.component.css']
 })
 export class AdminUsersListComponent implements OnInit {
   users = [];

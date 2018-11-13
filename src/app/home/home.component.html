@@ -20,7 +20,7 @@
         <mat-tab label="Books">
             <div id='left1'>
                 <h6>What people are reading</h6>
-                <mat-grid-list cols="2" rowHeight="2:1" gutterSize='8px'>
+                <mat-grid-list cols="2" rowHeight="3:1" gutterSize='8px'>
                     <mat-grid-tile *ngFor='let book of books; let i = index'  (click)='whodis(i)'>
                           {{book.title}}
                         <br> 
@@ -33,7 +33,7 @@
             </div>
             <div id='right1'>
                 <h6>Recent reviews</h6>
-                <mat-grid-list  cols='1' rowHeight='110px' gutterSize='8px'>
+                <mat-grid-list  cols='1' rowHeight='6:1' gutterSize='8px'>
                   <mat-grid-tile *ngFor='let review of reviews; let i = index'>
                     {{review.book}}
                     <br>
@@ -46,10 +46,13 @@
         </mat-tab>
         <mat-tab label="Users"> 
             <div id='left2'>
-              <!-- <users></users> -->
-              <adminUsersList></adminUsersList>  
+                <h6>Active Users</h6>
+              <users></users>
+              <!-- <adminUsersList></adminUsersList>   -->
             </div>
-            <div id='right2'></div>
+            <div id='right2'>
+                <h6>Your connections</h6>
+            </div>
         </mat-tab>
         <mat-tab label="Misc">
             <div id='left3'></div>

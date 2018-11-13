@@ -24,10 +24,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { RegistrationComponent } from './registration/registration.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { AdminUsersListComponent } from './users/adminUsersList.component';
+import { AdminUsersListComponent } from './adminUsersList/adminUsersList.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PostComponent } from './post/post.component';
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './home/home.component';
+import { UsersComponent } from './users/users.component'
 
 //API Keys
 // google books api: AIzaSyCgjYrO5EaMufZXK6yaX5L2rPqOKtU4pME
@@ -52,7 +53,8 @@ var routes = [
     AdminUsersListComponent,
     ProfileComponent,
     PostComponent,
-    HomeComponent
+    HomeComponent,
+    UsersComponent
   ],
   imports: [
     ReactiveFormsModule,
