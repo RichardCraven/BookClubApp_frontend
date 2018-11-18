@@ -1,7 +1,7 @@
 <mat-card>
   
   <mat-card-title>
-    Welcome to the Bay Area Book Club
+    <!-- Welcome to the Bay Area Book Club -->
   </mat-card-title>
   <mat-card-content>
     <!-- <h1>THIS IS A TEST</h1> -->
@@ -16,7 +16,7 @@
   </mat-card-content>
 </mat-card>
 <mat-card *ngIf='isLoggedIn' class='main-card'>
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="tabClick($event)">
         <mat-tab label="Books">
             <div id='left1'>
                 <h6>What people are reading</h6>
@@ -51,7 +51,24 @@
               <!-- <adminUsersList></adminUsersList>   -->
             </div>
             <div id='right2'>
-                <h6>Your connections</h6>
+                <!-- <h6>Your connections</h6> -->
+                <mat-tab-group>
+                    <mat-tab label="Friends">
+                        <mat-grid-list  cols='1' rowHeight='6:1' gutterSize='8px'>
+                          <mat-grid-tile *ngFor='let friend of authService.loggedInUser?.friends let i = index'>
+                            {{friend.name}}
+                          </mat-grid-tile>
+                        </mat-grid-list>
+                    </mat-tab>
+                    <mat-tab label="Friend Requests">
+                      <!-- authService.loggedInUser?.friend_ -->
+                      <mat-grid-list  cols='1' rowHeight='6:1' gutterSize='8px'>
+                        <mat-grid-tile *ngFor='let request of authService.loggedInUser?.friend_requests let i = index'>
+                          {{request.name}}
+                        </mat-grid-tile>
+                      </mat-grid-list>
+                    </mat-tab>
+                </mat-tab-group>
             </div>
         </mat-tab>
         <mat-tab label="Misc">

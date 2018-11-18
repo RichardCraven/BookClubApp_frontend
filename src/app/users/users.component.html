@@ -1,3 +1,16 @@
-<p>
-  users works!
-</p>
+<div *ngFor="let user of apiService.users; let i = index">
+    <div class='user-tab-container' *ngIf='user._id !== authService.loggedInUser?._id'>
+      <mat-card class='userCardTab' (click)='expandCard(i)' style='cursor: pointer;'>
+      {{user.name}}</mat-card>
+      <mat-card class='user-active-token'> Last Active <br> <span> Sometime </span> </mat-card>
+      <mat-card class='connection-token' (click)='requestConnection(i)'> 
+        <span *ngIf='authService.outboundRequestList.indexOf(user._id) > -1'>Connection requested</span>
+        <span *ngIf='authService.outboundRequestList.indexOf(user._id) === -1'>Connect </span>
+      </mat-card>
+    </div>
+    <mat-card class='userCardExpanded' *ngIf='expandedIndex === i'>
+      Currently reading: {{user.name}} <br> <br>
+      Reviews <br> <br>
+      Bio: {{user.description}}
+    </mat-card>
+  </div>

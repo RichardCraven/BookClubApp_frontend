@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService} from '../api.service'
+import { AuthService} from '../auth.service'
+import { Subscription } from 'rxjs';
 import { isDifferent } from '@angular/core/src/render3/util';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +12,8 @@ import { isDifferent } from '@angular/core/src/render3/util';
 })
 export class HomeComponent implements OnInit {
   isLoggedIn;
+  componentMessage: any;
+  subscription: Subscription;
   books = [];
   reviews = [
     {
@@ -27,7 +32,7 @@ export class HomeComponent implements OnInit {
       content: 'I thought this was a book based on the movie that I loved as a kid. Turns out is about something completely isDifferent.'
     }
   ]
-  constructor(private apiService: ApiService) { 
+  constructor(private apiService: ApiService, private authService: AuthService) { 
     this.books.push({
       title: 'Moby Dick',
       author: 'Herman Melville',
@@ -93,6 +98,13 @@ export class HomeComponent implements OnInit {
       author: 'some lady',
       published: 1880
     })
+    this.subscription = this.authService.getMessage().subscribe(data => { 
+      // console.log('huzzah! x222', this.authService.loggedInUser)
+
+      // if(data.id == 'id_transfer'){
+      //   console.log('setting admin to TRUE');
+      // } 
+    });
   }
 
   ngOnInit() {
@@ -103,10 +115,19 @@ export class HomeComponent implements OnInit {
       // console.log('huzzah!');
       this.isLoggedIn = true;
     }
+    var that = this;
+    setTimeout(function(){
+      // console.log('hey timeout')
+      // console.log('checking logged in user ', that.authService.loggedInUser);
+    }, 1000)
+    // console.log('checking logged in user ', this.authService.loggedInUser);
+    
+  }
+  tabClick(e){
+    //workaround for nested tabgroup not rendering
+    window.dispatchEvent(new Event('resize'))
   }
   whodis(index){
     console.log('hey!', this.books[index]);
-    
   }
-
 }

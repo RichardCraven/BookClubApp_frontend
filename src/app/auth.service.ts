@@ -11,6 +11,10 @@ export class AuthService {
     private idSubject = new Subject<any>();
     userRejected = false;
     loginRejected = false;
+    loggedInUser;
+    friendList = [];
+    inboundRequestList = [];
+    outboundRequestList = [];
     path = environment.path +'/auth'
     TOKEN_KEY = 'token'
 
@@ -52,8 +56,30 @@ export class AuthService {
     }
     loginUser(loginData) {
         this.http.post<any>(this.path + '/login', loginData).subscribe(res => {
+            console.log('WAIT A GODDAM MINUTElogin data is ', res);
             
-            this.login(res.token, res.name)
+            this.login(res.token, res.user.name)
+            this.loggedInUser = res.user;
+
+            //the issue you were having is that you're checking this user's friend request list, 
+            //when it's actually the requestee's list that has this user's id in it
+            //so you gotta store an outbound request list and an inbound request list
+
+            //OKAY so I've added an inbound/outbound list for users model, and a name field, test these out!
+
+            for(var request in res.user.outbound_friend_requests){
+                this.outboundRequestList.push(res.user.outbound_friend_requests[request])
+            }
+            console.log('outboundrequest list is ', this.outboundRequestList);
+            for(var request in res.user.inbound_friend_requests){
+                this.inboundRequestList.push(res.user.inbound_friend_requests[request])
+            }
+            console.log('inboundrequest list is ', this.outboundRequestList);
+            for(var friend in res.user.friends){
+                this.friendList.push(res.user.friends[friend])
+            }
+            console.log('friend list is ', this.friendList);
+            // this.friendList = 
         },
         err => {
             console.log('error! is ', err)
@@ -76,14 +102,38 @@ export class AuthService {
         localStorage.clear()
         this.router.navigate(['/login']);
         this.sendMessage('isNotAdmin')
+        this.loggedInUser = null;
     }
     checkAdminPrivileges(){
+        // console.log('checking for loggedin user');
+        
+        //need to reset loggedin user
+
         this.http.post<any>(this.path + '/checkAdmin', {dummyData : 'data'}).subscribe(res => {
-            console.log('YO! res is ', res)
-            if(res.admin){
+            console.log('CHECKING ADMIN! res.user is ', res.user)
+
+            this.loggedInUser = res.user;
+
+            for(var request in res.user.outbound_friend_requests){
+                this.outboundRequestList.push(res.user.outbound_friend_requests[request])
+            }
+            console.log('outboundrequest list is ', this.outboundRequestList);
+            for(var request in res.user.inbound_friend_requests){
+                this.inboundRequestList.push(res.user.inbound_friend_requests[request])
+            }
+            console.log('inboundrequest list is ', this.outboundRequestList);
+            for(var friend in res.user.friends){
+                this.friendList.push(res.user.friends[friend])
+            }
+            console.log('friend list is ', this.friendList);
+            
+            if(res.user.admin){
                 this.sendMessage('isAdmin')
-            };
-            this.sendId(res.user_id)
+            } else {
+                this.sendMessage('nlah blah blah')
+            }
+            // this.sendId(res.user._id)
+            
         })
     }
     // checkId(){
@@ -99,9 +149,9 @@ export class AuthService {
     sendMessage(message: string) {
         this.subject.next({ message: message });
     }
-    sendId(id: String){
-        this.idSubject.next({id: id})
-    }
+    // sendId(id: String){
+    //     this.idSubject.next({id: id})
+    // }
     clearMessage() {
         this.subject.next();
     }

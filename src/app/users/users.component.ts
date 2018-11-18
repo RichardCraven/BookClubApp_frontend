@@ -5,20 +5,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'users',
-  template: `
-    <div *ngFor="let user of apiService.users; let i = index">
-      <div class='user-tab-container' *ngIf='user._id !== loggedInUserId'>
-        <mat-card class='userCardTab' (click)='expandCard(i)' style='cursor: pointer;' >{{user.name}}</mat-card>
-        <mat-card class='user-active-token'> Last Active <br> <span> Sometime </span> </mat-card>
-        <mat-card class='connection-token' (click)='requestConnection(i)'> Connect </mat-card>
-      </div>
-      <mat-card class='userCardExpanded' *ngIf='expandedIndex === i'>
-        Currently reading: {{user.name}} <br> <br>
-        Reviews <br> <br>
-        Bio: {{user.description}}
-      </mat-card>
-    </div>
-  `,
+  templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
@@ -59,7 +46,7 @@ export class UsersComponent implements OnInit {
   }
   requestConnection(i){
     //this.profile._id refers to the person youre adding
-    console.log(this.apiService.users[i]._id)
+    console.log('requesting connection ', this.apiService.users[i]._id)
     this.apiService.requestConnection({id: this.apiService.users[i]._id})
   }
 }
