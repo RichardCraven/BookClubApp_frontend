@@ -12,7 +12,8 @@ export class RegistrationComponent implements OnInit {
     email: '',
     pwd: '',
     description: '',
-    name: ''
+    name: '',
+    favorite_books : <any> ''
   };
   message: any;
   subscription: Subscription;
@@ -23,10 +24,27 @@ export class RegistrationComponent implements OnInit {
         this.registrationData.pwd = '';
         this.registrationData.description = '';
         this.registrationData.name = '';
+        this.registrationData.favorite_books = '';
       }
     });
   }
   post (){
+    var favorites = this.registrationData.favorite_books;
+    var pointer = 0;
+    var arr= [];
+    //code to parse through the registration.favorite_books and eleminate empty spaces and add each comma seperated to an array
+    if(favorites.length){
+      for(var i = 0; i < favorites.length; i++){
+        if(favorites[i] === ','){
+          arr.push(favorites.slice(pointer,i))
+          pointer = i+1
+        }
+      }
+      console.log(arr);      
+      // this.registrationData.favorite_books = arr;
+    }
+
+    // return
     this.authService.registerUser(this.registrationData)
   }
   ngOnDestroy() {

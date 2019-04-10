@@ -1,16 +1,37 @@
 <div *ngFor="let user of apiService.users; let i = index">
     <div class='user-tab-container' *ngIf='user._id !== authService.loggedInUser?._id'>
       <mat-card class='userCardTab' (click)='expandCard(i)' style='cursor: pointer;'>
-      {{user.name}}</mat-card>
-      <mat-card class='user-active-token'> Last Active <br> <span> Sometime </span> </mat-card>
-      <mat-card class='connection-token' (click)='requestConnection(i)'> 
-        <span *ngIf='authService.outboundRequestList.indexOf(user._id) > -1'>Connection requested</span>
-        <span *ngIf='authService.outboundRequestList.indexOf(user._id) === -1'>Connect </span>
+      {{user.name}}
       </mat-card>
+      <mat-card class='user-active-token'> 
+        <span>Last Active</span>  <br> <span class='last-active-span-text'> {{user.last_active}} </span> 
+      </mat-card>
+      <!-- <div *ngIf='!authService.friendList.indexOf(user._id) > -1'>
+      </div>   -->
+      <mat-card class='connection-token' *ngIf='authService.friendList?.indexOf(user._id) > -1; else notFriend' (click)='requestConnection(i)'> 
+          <span>Friend</span>
+      </mat-card>
+      <ng-template #notFriend>
+        <mat-card class='connection-token connect-request' *ngIf='authService.outboundRequestList?.indexOf(user._id) === -1 && authService.inboundRequestList.indexOf(user._id) === -1; else requestPending' (click)='requestConnection(i)'> 
+              <span class='spanie'>Connect</span>
+        </mat-card>
+        <ng-template #requestPending>
+          <mat-card class='connection-token connect-pending'>
+            <span id='outbound' class='connect-outbound' *ngIf='authService.outboundRequestList?.indexOf(user._id) > -1; else inBound'>Request Outbound</span>
+            <ng-template #inBound>
+              <span id='inbound' class='connect-inbound'>Request Inbound</span>
+            </ng-template>
+          </mat-card>
+        </ng-template>
+      </ng-template>
     </div>
     <mat-card class='userCardExpanded' *ngIf='expandedIndex === i'>
       Currently reading: {{user.name}} <br> <br>
       Reviews <br> <br>
-      Bio: {{user.description}}
+      Bio: {{user.description}} <br><br>
+      Favorite Books: 
+      <mat-list>
+          <mat-list-item *ngFor='let book of user.favorite_books'>{{book.title}}</mat-list-item>
+      </mat-list>
     </mat-card>
   </div>

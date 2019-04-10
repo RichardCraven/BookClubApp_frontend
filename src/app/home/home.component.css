@@ -1,3 +1,6 @@
+*{
+    user-select: none; 
+}
 .mat-card{
     /* height: 40vh; */
     text-align: center;
@@ -11,7 +14,7 @@
     height: 100%;
 }
 mat-tab-group{
-    width: 94%;
+    /* width: 94%; */
 }
 #left1, #left2, #left3{
     height: 60vh;
@@ -62,7 +65,7 @@ mat-tab-body-content{
 mat-grid-list{
     /* margin-top: 10px; */
     overflow: scroll;
-    height: 100% !important
+    /* height: 100% !important */
     ;
 }
 mat-grid-tile {
@@ -90,4 +93,9 @@ mat-grid-tile-footer{
 mat-grid-tile:hover, mat-grid-tile-header:hover, mat-grid-tile-footer:hover{
     background-color: violet !important;
     cursor: pointer;
+}
+.requestCardExpanded{
+    height: 20vh !important;
+    text-align: left;
+    border-radius: 0 !important;
 }

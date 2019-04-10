@@ -11,23 +11,16 @@ export class AppComponent {
   title = 'bookClub';
   componentMessage: any;
   subscription: Subscription;
-  isAdmin;
-  // user;
+  
   constructor(public authService: AuthService) { 
-    this.subscription = this.authService.getMessage().subscribe(data => { 
-      if(data.message == 'isAdmin'){
-        console.log('setting admin to TRUE');
-        this.isAdmin = true;
-      } else if(data.message == 'isNotAdmin'){
-        console.log('setting admin to false');
-        this.isAdmin = false;
-      }
-    });
+    // this.subscription = this.authService.getMessage().subscribe(data => { 
+
+    // });
   }
 
   ngOnInit(){
     if(this.authService.isAuthenticated){
-      this.authService.checkAdminPrivileges();
+      this.authService.setUser();
     }
     console.log('app inited');
   }

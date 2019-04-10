@@ -23,6 +23,9 @@
         <textarea [(ngModel)]='registrationData.description' name='description' matInput placeholder="description"></textarea>
       </mat-form-field>
       <br>
+      <mat-form-field>
+        <input class='favorites-input' [(ngModel)]='registrationData.favorite_books' name='favorites' matInput  placeholder="Favorite Books (comma separated)">      
+      </mat-form-field>
       <button (click)='post()' mat-raised-button color='primary'>Register</button>
     </form>
   </mat-card-content>

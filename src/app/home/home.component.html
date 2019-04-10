@@ -52,7 +52,7 @@
             </div>
             <div id='right2'>
                 <!-- <h6>Your connections</h6> -->
-                <mat-tab-group>
+                <mat-tab-group [selectedIndex]="authService.loggedInUser?.friends.length ? 0 : 1">
                     <mat-tab label="Friends">
                         <mat-grid-list  cols='1' rowHeight='6:1' gutterSize='8px'>
                           <mat-grid-tile *ngFor='let friend of authService.loggedInUser?.friends let i = index'>
@@ -62,10 +62,22 @@
                     </mat-tab>
                     <mat-tab label="Friend Requests">
                       <!-- authService.loggedInUser?.friend_ -->
-                      <mat-grid-list  cols='1' rowHeight='6:1' gutterSize='8px'>
-                        <mat-grid-tile *ngFor='let request of authService.loggedInUser?.friend_requests let i = index'>
-                          {{request.name}}
-                        </mat-grid-tile>
+                      <mat-grid-list style='height: 50vh;' cols='11' rowHeight='1:1' gutterSize='10px'>
+                        <ng-container *ngFor='let request of authService.loggedInUser?.inbound_friend_requests; let i = index'>
+                          <mat-grid-tile colspan='9' (click)='expandRequest(i)'>
+                            {{request.name}}
+                          </mat-grid-tile>
+                          <mat-grid-tile colspan='1' (click)='apiService.addFriend({id : authService.loggedInUser.inbound_friend_requests[i]._id})'>
+                            ADD
+                          </mat-grid-tile>
+                          <mat-grid-tile colspan='10' *ngIf='expandedRequestIndex === i' class='requestCardExpanded'>
+                            {{request.description}}
+                            <br> <br>
+                            {{request.email}}
+                            <br> <br>
+                            To view
+                          </mat-grid-tile> 
+                        </ng-container>
                       </mat-grid-list>
                     </mat-tab>
                 </mat-tab-group>
@@ -76,5 +88,4 @@
             <div id='right3'></div>
         </mat-tab>
     </mat-tab-group>
-  
 </mat-card>

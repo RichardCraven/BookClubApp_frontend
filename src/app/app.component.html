@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar style='background-size: 100% 100%; background-repeat: no-repeat; background-image: url("../../assets/bayArea.jpg")'>
-  <button mat-button routerLink='/'>
+  <button class='home-button' mat-button routerLink='/'>
     Home
   </button>
   <button *ngIf='authService.loggedInUser?.admin' class='users-button' routerLink='/adminUsersList' mat-raised-button>Users</button>

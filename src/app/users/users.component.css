@@ -29,14 +29,19 @@
     border-radius: 0 !important;
     font-size: 0.5em;
     height: 2vh !important;
+}
+.connect-request{
     cursor:pointer;
 }
-.mat-card.connection-token:hover{
+.mat-card.connection-token.connect-request:hover{
     background-color: lightcyan;
 }
 .mat-card.userCardExpanded{
     height: 20vh !important;
     text-align: left;
     border-radius: 0 !important;
-    /* align-items: start; */
+}
+.last-active-span-text{
+    font-size: 0.5em;
+    color: red;
 }

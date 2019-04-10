@@ -21,3 +21,11 @@ textarea{
 /* .mat-list .mat-list-item.friends-list .mat-list-item-content{
     align-items: start !important;
 } */
+@media screen and (max-width: 600px){
+    body{
+        background-color: red;
+    }
+    span{
+        /* font-size: 0.2em; */
+    }
+}

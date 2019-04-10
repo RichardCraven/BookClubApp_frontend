@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn;
   componentMessage: any;
   subscription: Subscription;
+  expandedRequestIndex: Number;
   books = [];
   reviews = [
     {
@@ -127,6 +128,14 @@ export class HomeComponent implements OnInit {
     //workaround for nested tabgroup not rendering
     window.dispatchEvent(new Event('resize'))
   }
+  expandRequest(i){
+    console.log('expanding card', i);
+    if(this.expandedRequestIndex === i) this.expandedRequestIndex = null; else this.expandedRequestIndex = i;
+  }
+  // acceptRequest(i){
+  //   this.authService.acceptRequest
+  //   this.authService.loggedInUser ? this.authService.loggedInUser.inbound_friend_requests = 0 : null
+  // }
   whodis(index){
     console.log('hey!', this.books[index]);
   }

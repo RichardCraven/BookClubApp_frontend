@@ -25,10 +25,16 @@ export class ApiService {
     
     getUsers() {
         this.http.get<any>(this.path + '/users').subscribe(res => {
+            for(var i in res){
+                var date = new Date(res[i].last_active)
+                res[i].last_active = date.toUTCString()
+            }
             this.users = res;
         })
     }
     addFriend(userData){
+        console.log('user data ', userData);
+        
         this.http.post<any>(this.path + '/add_connection', userData)
         .subscribe(res => {
             console.log('in addfriend res, res is', res.message);

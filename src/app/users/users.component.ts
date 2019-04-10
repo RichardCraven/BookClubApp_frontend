@@ -45,8 +45,8 @@ export class UsersComponent implements OnInit {
     if(this.expandedIndex === i) this.expandedIndex = null; else this.expandedIndex = i;
   }
   requestConnection(i){
-    //this.profile._id refers to the person youre adding
-    console.log('requesting connection ', this.apiService.users[i]._id)
-    this.apiService.requestConnection({id: this.apiService.users[i]._id})
+    var user_id = this.apiService.users[i]._id
+    this.apiService.requestConnection({id: user_id})
+    this.authService.outboundRequestList.push(user_id)
   }
 }
